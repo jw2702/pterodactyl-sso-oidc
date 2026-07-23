@@ -131,8 +131,7 @@ All settings live under `Admin > Extensions > OIDC SSO Login`:
 
 ## Setup
 
-1. **Build/install the extension** — see "Installation (development)"
-   below for the exact commands.
+1. **Install the extension** — see "Installation" below.
 2. **Register a confidential OIDC client** at your provider (authentik,
    Keycloak, Azure AD, ...). Open `/admin/extensions/ssooidc` in Pterodactyl
    first to get the exact **Redirect / Callback URL** to register there.
@@ -157,20 +156,17 @@ All settings live under `Admin > Extensions > OIDC SSO Login`:
 See the `## Configuration` table and the `## How it works` section above for
 what each setting actually does and why it's built the way it is.
 
-## Installation (development)
+## Installation
 
-```bash
-# Enable developer mode in the admin panel under /admin/extensions, then:
-rm -rf /var/www/pterodactyl/.blueprint/dev/*
-cp -r ssooidc/* /var/www/pterodactyl/.blueprint/dev/
-cd /var/www/pterodactyl
-blueprint -build
-```
+1. Download the latest `ssooidc.blueprint` file from the
+   [Releases](https://github.com/jw2702/pterodactyl-sso-oidc/releases) page.
+2. Upload it to your panel and run:
 
-`.blueprint/dev` is always flat in Blueprint (one extension per dev folder)
-— the files go directly into it, not into a further `ssooidc/` subfolder.
+   ```bash
+   blueprint -install ssooidc.blueprint
+   ```
 
-After building, set the callback URL shown on the extension's admin page as
+After installing, set the callback URL shown on the extension's admin page as
 the redirect URI at the OIDC provider, then fill in issuer/client
 credentials and enable it. Optionally, also set the provider's "Logout URI"
 / "Backchannel Logout URI" (if it has one) to the backchannel-logout URL

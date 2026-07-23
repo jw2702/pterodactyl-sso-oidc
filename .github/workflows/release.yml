@@ -1,0 +1,32 @@
+name: Build and Release Blueprint Extension
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update version in conf.yml
+        run: |
+          VERSION="${{ github.ref_name }}"
+          CLEAN_VERSION="${VERSION#v}"
+          sed -i "s/^version:.*/version: \"$CLEAN_VERSION\"/" conf.yml
+          echo "Updated conf.yml version to: $CLEAN_VERSION"
+
+      - name: Build Blueprint extension
+        uses: blueprint-community/action-export@main
+
+      - name: Upload .blueprint to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "*.blueprint"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
