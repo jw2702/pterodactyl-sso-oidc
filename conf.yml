@@ -1,0 +1,37 @@
+info:
+  name: "OIDC SSO Login"
+  identifier: "ssooidc"
+  description: "Adds OpenID Connect (OIDC) single sign-on login to Pterodactyl, with just-in-time account creation/updates, email-based account matching (decided fresh on every login, nothing is persisted) and a 2FA skip for SSO logins."
+  flags: ""
+  version: "1.12.2"
+  target: "beta-2026-06"
+  author: "jw2702"
+  icon: ""
+  website: "https://github.com/jw2702/pterodactyl-sso-oidc"
+
+admin:
+  view: "admin/view.blade.php"
+  controller: "admin/controller.php"
+  css: ""
+  wrapper: ""
+
+dashboard:
+  css: ""
+  wrapper: ""
+  components: "dashboard/components"
+
+data:
+  directory: "data"
+  public: ""
+  console: ""
+
+requests:
+  views: ""
+  app: "app"
+  routers:
+    application: ""
+    client: ""
+    web: "web.php"
+
+database:
+  migrations: "migrations"
